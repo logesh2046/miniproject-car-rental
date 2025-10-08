@@ -91,6 +91,296 @@ const carData = {
       smoking: "No smoking policy",
     },
   },
+  2: {
+    id: 2,
+    name: "Toyota Camry",
+    type: "Midsize Sedan",
+    price: 59,
+    originalPrice: 69,
+    images: [
+      "/toyota-camry-midsize-sedan.jpg",
+      "/placeholder.svg?height=400&width=600&text=Toyota+Interior",
+      "/placeholder.svg?height=400&width=600&text=Toyota+Dashboard",
+      "/placeholder.svg?height=400&width=600&text=Toyota+Trunk",
+    ],
+    rating: 4.6,
+    reviews: 89,
+    location: "Airport",
+    available: true,
+    description:
+      "The Toyota Camry offers excellent fuel efficiency and reliability. Perfect for both city driving and long trips with its comfortable interior and smooth ride.",
+    specifications: {
+      year: "2023",
+      make: "Toyota",
+      model: "Camry",
+      engine: "2.5L Hybrid",
+      horsepower: "208 HP",
+      transmission: "CVT Automatic",
+      drivetrain: "FWD",
+      fuelType: "Hybrid",
+      fuelEconomy: "51 city / 53 hwy mpg",
+      seats: 5,
+      doors: 4,
+      luggage: "15.1 cu ft",
+      color: "Silver Sky Metallic",
+    },
+    features: [
+      { icon: Wifi, name: "WiFi Hotspot" },
+      { icon: Snowflake, name: "Climate Control" },
+      { icon: Music, name: "Premium Audio" },
+      { icon: NavigationIcon, name: "GPS Navigation" },
+      { icon: Bluetooth, name: "Bluetooth" },
+      { icon: Camera, name: "Backup Camera" },
+      { icon: Shield, name: "Safety Sense" },
+      { icon: Users, name: "Cloth Seats" },
+    ],
+    included: [
+      "Comprehensive Insurance",
+      "24/7 Roadside Assistance",
+      "Free Cancellation",
+      "Unlimited Mileage",
+      "Additional Driver",
+    ],
+    policies: {
+      minAge: 21,
+      license: "Valid driver's license required",
+      deposit: "$300 security deposit",
+      fuel: "Return with same fuel level",
+      smoking: "No smoking policy",
+    },
+  },
+  3: {
+    id: 3,
+    name: "Range Rover Sport",
+    type: "Luxury SUV",
+    price: 149,
+    originalPrice: 169,
+    images: [
+      "/range-rover-sport-luxury-suv.jpg",
+      "/placeholder.svg?height=400&width=600&text=Range+Rover+Interior",
+      "/placeholder.svg?height=400&width=600&text=Range+Rover+Dashboard",
+      "/placeholder.svg?height=400&width=600&text=Range+Rover+Cargo",
+    ],
+    rating: 4.9,
+    reviews: 156,
+    location: "Downtown",
+    available: true,
+    description:
+      "Experience ultimate luxury and capability with the Range Rover Sport. This premium SUV combines off-road prowess with sophisticated comfort and cutting-edge technology.",
+    specifications: {
+      year: "2023",
+      make: "Land Rover",
+      model: "Range Rover Sport",
+      engine: "3.0L Turbo",
+      horsepower: "355 HP",
+      transmission: "8-Speed Automatic",
+      drivetrain: "AWD",
+      fuelType: "Petrol",
+      fuelEconomy: "19 city / 26 hwy mpg",
+      seats: 7,
+      doors: 5,
+      luggage: "27.5 cu ft",
+      color: "Fuji White",
+    },
+    features: [
+      { icon: Wifi, name: "WiFi Hotspot" },
+      { icon: Snowflake, name: "Climate Control" },
+      { icon: Music, name: "Meridian Audio" },
+      { icon: NavigationIcon, name: "GPS Navigation" },
+      { icon: Bluetooth, name: "Bluetooth" },
+      { icon: Camera, name: "360° Camera" },
+      { icon: Shield, name: "Terrain Response" },
+      { icon: Users, name: "Leather Seats" },
+    ],
+    included: [
+      "Comprehensive Insurance",
+      "24/7 Roadside Assistance",
+      "Free Cancellation",
+      "Unlimited Mileage",
+      "Additional Driver",
+    ],
+    policies: {
+      minAge: 25,
+      license: "Valid driver's license required",
+      deposit: "$1000 security deposit",
+      fuel: "Return with same fuel level",
+      smoking: "No smoking policy",
+    },
+  },
+  4: {
+    id: 4,
+    name: "Honda Civic",
+    type: "Compact Car",
+    price: 45,
+    originalPrice: 55,
+    images: [
+      "/honda-civic-compact-car.png",
+      "/placeholder.svg?height=400&width=600&text=Honda+Interior",
+      "/placeholder.svg?height=400&width=600&text=Honda+Dashboard",
+      "/placeholder.svg?height=400&width=600&text=Honda+Trunk",
+    ],
+    rating: 4.4,
+    reviews: 67,
+    location: "City Center",
+    available: true,
+    description:
+      "The Honda Civic delivers exceptional value with its fuel-efficient engine, spacious interior, and advanced safety features. Perfect for urban commuting and weekend getaways.",
+    specifications: {
+      year: "2023",
+      make: "Honda",
+      model: "Civic",
+      engine: "1.5L Turbo",
+      horsepower: "180 HP",
+      transmission: "6-Speed Manual",
+      drivetrain: "FWD",
+      fuelType: "Petrol",
+      fuelEconomy: "31 city / 40 hwy mpg",
+      seats: 5,
+      doors: 4,
+      luggage: "14.8 cu ft",
+      color: "Rallye Red",
+    },
+    features: [
+      { icon: Wifi, name: "WiFi Hotspot" },
+      { icon: Snowflake, name: "Climate Control" },
+      { icon: Music, name: "Audio System" },
+      { icon: NavigationIcon, name: "GPS Navigation" },
+      { icon: Bluetooth, name: "Bluetooth" },
+      { icon: Camera, name: "Backup Camera" },
+      { icon: Shield, name: "Honda Sensing" },
+      { icon: Users, name: "Cloth Seats" },
+    ],
+    included: [
+      "Comprehensive Insurance",
+      "24/7 Roadside Assistance",
+      "Free Cancellation",
+      "Unlimited Mileage",
+      "Additional Driver",
+    ],
+    policies: {
+      minAge: 21,
+      license: "Valid driver's license required",
+      deposit: "$200 security deposit",
+      fuel: "Return with same fuel level",
+      smoking: "No smoking policy",
+    },
+  },
+  5: {
+    id: 5,
+    name: "Mercedes C-Class",
+    type: "Luxury Sedan",
+    price: 95,
+    originalPrice: 110,
+    images: [
+      "/mercedes-c-class-luxury-sedan.jpg",
+      "/placeholder.svg?height=400&width=600&text=Mercedes+Interior",
+      "/placeholder.svg?height=400&width=600&text=Mercedes+Dashboard",
+      "/placeholder.svg?height=400&width=600&text=Mercedes+Trunk",
+    ],
+    rating: 4.7,
+    reviews: 98,
+    location: "Airport",
+    available: false,
+    description:
+      "The Mercedes C-Class represents the perfect balance of luxury and performance. With its elegant design, premium materials, and advanced technology, it delivers an exceptional driving experience.",
+    specifications: {
+      year: "2023",
+      make: "Mercedes-Benz",
+      model: "C-Class",
+      engine: "2.0L Turbo",
+      horsepower: "255 HP",
+      transmission: "9-Speed Automatic",
+      drivetrain: "RWD",
+      fuelType: "Petrol",
+      fuelEconomy: "24 city / 35 hwy mpg",
+      seats: 5,
+      doors: 4,
+      luggage: "12.6 cu ft",
+      color: "Obsidian Black Metallic",
+    },
+    features: [
+      { icon: Wifi, name: "WiFi Hotspot" },
+      { icon: Snowflake, name: "Climate Control" },
+      { icon: Music, name: "Burmester Audio" },
+      { icon: NavigationIcon, name: "GPS Navigation" },
+      { icon: Bluetooth, name: "Bluetooth" },
+      { icon: Camera, name: "360° Camera" },
+      { icon: Shield, name: "Active Safety" },
+      { icon: Users, name: "Leather Seats" },
+    ],
+    included: [
+      "Comprehensive Insurance",
+      "24/7 Roadside Assistance",
+      "Free Cancellation",
+      "Unlimited Mileage",
+      "Additional Driver",
+    ],
+    policies: {
+      minAge: 25,
+      license: "Valid driver's license required",
+      deposit: "$500 security deposit",
+      fuel: "Return with same fuel level",
+      smoking: "No smoking policy",
+    },
+  },
+  6: {
+    id: 6,
+    name: "Ford Explorer",
+    type: "SUV",
+    price: 79,
+    originalPrice: 89,
+    images: [
+      "/ford-explorer-suv.png",
+      "/placeholder.svg?height=400&width=600&text=Ford+Interior",
+      "/placeholder.svg?height=400&width=600&text=Ford+Dashboard",
+      "/placeholder.svg?height=400&width=600&text=Ford+Cargo",
+    ],
+    rating: 4.5,
+    reviews: 112,
+    location: "Downtown",
+    available: true,
+    description:
+      "The Ford Explorer offers spacious seating for up to 7 passengers and impressive cargo capacity. With its powerful engine and advanced safety features, it's perfect for family adventures.",
+    specifications: {
+      year: "2023",
+      make: "Ford",
+      model: "Explorer",
+      engine: "2.3L Turbo",
+      horsepower: "300 HP",
+      transmission: "10-Speed Automatic",
+      drivetrain: "AWD",
+      fuelType: "Petrol",
+      fuelEconomy: "20 city / 27 hwy mpg",
+      seats: 7,
+      doors: 5,
+      luggage: "18.2 cu ft",
+      color: "Oxford White",
+    },
+    features: [
+      { icon: Wifi, name: "WiFi Hotspot" },
+      { icon: Snowflake, name: "Climate Control" },
+      { icon: Music, name: "B&O Audio" },
+      { icon: NavigationIcon, name: "GPS Navigation" },
+      { icon: Bluetooth, name: "Bluetooth" },
+      { icon: Camera, name: "360° Camera" },
+      { icon: Shield, name: "Co-Pilot360" },
+      { icon: Users, name: "Leather Seats" },
+    ],
+    included: [
+      "Comprehensive Insurance",
+      "24/7 Roadside Assistance",
+      "Free Cancellation",
+      "Unlimited Mileage",
+      "Additional Driver",
+    ],
+    policies: {
+      minAge: 25,
+      license: "Valid driver's license required",
+      deposit: "$400 security deposit",
+      fuel: "Return with same fuel level",
+      smoking: "No smoking policy",
+    },
+  },
 }
 
 const reviews = [
@@ -191,7 +481,7 @@ export default function CarDetailsPage() {
                   <div className="absolute top-4 left-4 flex gap-2">
                     {!car.available && <Badge variant="destructive">Not Available</Badge>}
                     {car.originalPrice > car.price && (
-                      <Badge className="bg-green-500 hover:bg-green-600">Save ${car.originalPrice - car.price}</Badge>
+                      <Badge className="bg-green-500 hover:bg-green-600">Save ₹{car.originalPrice - car.price}</Badge>
                     )}
                   </div>
                   <div className="absolute top-4 right-4 flex gap-2">
@@ -364,16 +654,16 @@ export default function CarDetailsPage() {
                   <div className="space-y-2">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
-                        <span className="text-3xl font-bold text-primary">${car.price}</span>
+                        <span className="text-3xl font-bold text-primary">₹{car.price}</span>
                         <span className="text-muted-foreground">/day</span>
                         {car.originalPrice > car.price && (
-                          <span className="text-lg text-muted-foreground line-through">${car.originalPrice}</span>
+                          <span className="text-lg text-muted-foreground line-through">₹{car.originalPrice}</span>
                         )}
                       </div>
                     </div>
                     {car.originalPrice > car.price && (
                       <p className="text-sm text-green-600 font-medium">
-                        You save ${car.originalPrice - car.price} per day!
+                        You save ₹{car.originalPrice - car.price} per day!
                       </p>
                     )}
                   </div>
@@ -461,7 +751,7 @@ export default function CarDetailsPage() {
                             <span className="ml-1 text-sm">{similarCar.rating}</span>
                           </div>
                           <div className="text-right">
-                            <span className="text-lg font-bold text-primary">${similarCar.price}</span>
+                            <span className="text-lg font-bold text-primary">₹{similarCar.price}</span>
                             <span className="text-sm text-muted-foreground">/day</span>
                           </div>
                         </div>

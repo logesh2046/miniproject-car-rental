@@ -213,7 +213,7 @@ export default function CarsPage() {
 
                     <div className="space-y-4">
                       <label className="text-sm font-medium text-foreground">
-                        Price Range: ${priceRange[0]} - ${priceRange[1]}
+                        Price Range: ₹{priceRange[0]} - ₹{priceRange[1]}
                       </label>
                       <Slider
                         value={priceRange}
@@ -251,7 +251,7 @@ export default function CarsPage() {
                     {!car.available && <Badge variant="destructive">Not Available</Badge>}
                     {car.originalPrice > car.price && (
                       <Badge className="bg-green-500 hover:bg-green-600 ml-2">
-                        Save ${car.originalPrice - car.price}
+                        Save ₹{car.originalPrice - car.price}
                       </Badge>
                     )}
                   </div>
@@ -307,10 +307,10 @@ export default function CarsPage() {
                     <div className="flex items-center justify-between">
                       <div className="space-y-1">
                         <div className="flex items-center gap-2">
-                          <span className="text-2xl font-bold text-primary">${car.price}</span>
+                          <span className="text-2xl font-bold text-primary">₹{car.price}</span>
                           <span className="text-muted-foreground">/day</span>
                           {car.originalPrice > car.price && (
-                            <span className="text-sm text-muted-foreground line-through">${car.originalPrice}</span>
+                            <span className="text-sm text-muted-foreground line-through">₹{car.originalPrice}</span>
                           )}
                         </div>
                       </div>
@@ -318,8 +318,8 @@ export default function CarsPage() {
                         <Button variant="outline" size="sm" asChild>
                           <Link href={`/cars/${car.id}`}>View Details</Link>
                         </Button>
-                        <Button size="sm" disabled={!car.available}>
-                          {car.available ? "Book Now" : "Unavailable"}
+                        <Button size="sm" disabled={!car.available} asChild={car.available}>
+                          {car.available ? <Link href={`/booking/${car.id}`}>Book Now</Link> : "Unavailable"}
                         </Button>
                       </div>
                     </div>

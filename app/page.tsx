@@ -5,6 +5,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Calendar, MapPin, Users, Star, Shield, Clock } from "lucide-react"
 import { Navigation } from "@/components/navigation"
 import { Footer } from "@/components/footer"
+import Link from "next/link"
 
 export default function HomePage() {
   return (
@@ -103,21 +104,21 @@ export default function HomePage() {
                 {
                   name: "BMW 3 Series",
                   type: "Luxury Sedan",
-                  price: "$89",
+                  price: "89",
                   image: "/bmw-3-series-luxury-sedan.jpg",
                   features: ["Automatic", "5 Seats", "Premium Audio"],
                 },
                 {
                   name: "Toyota Camry",
                   type: "Midsize Sedan",
-                  price: "$59",
+                  price: "59",
                   image: "/toyota-camry-midsize-sedan.jpg",
                   features: ["Automatic", "5 Seats", "Fuel Efficient"],
                 },
                 {
                   name: "Range Rover Sport",
                   type: "Luxury SUV",
-                  price: "$149",
+                  price: "149",
                   image: "/range-rover-sport-luxury-suv.jpg",
                   features: ["AWD", "7 Seats", "Premium Interior"],
                 },
@@ -151,10 +152,12 @@ export default function HomePage() {
                       </div>
                       <div className="flex items-center justify-between">
                         <div>
-                          <span className="text-2xl font-bold text-primary">{car.price}</span>
+                          <span className="text-2xl font-bold text-primary">₹{car.price}</span>
                           <span className="text-muted-foreground">/day</span>
                         </div>
-                        <Button>Book Now</Button>
+                        <Button asChild>
+                          <Link href={`/cars/${index + 1}`}>Book Now</Link>
+                        </Button>
                       </div>
                     </div>
                   </CardContent>

@@ -4,595 +4,446 @@ import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Separator } from "@/components/ui/separator"
-import { Navigation } from "@/components/navigation"
-import { Footer } from "@/components/footer"
 import {
+  BarChart3,
+  Home,
   Car,
   Calendar,
+  Shield,
+  Navigation,
+  Users,
+  Settings,
+  Bell,
+  TrendingUp,
   MapPin,
+  Phone,
+  DollarSign,
   Clock,
   Star,
-  Settings,
-  CreditCard,
-  Bell,
-  Shield,
-  Download,
-  Eye,
-  Edit,
-  Trash2,
-  Plus,
+  AlertCircle,
+  CheckCircle
 } from "lucide-react"
+import { Navigation as NavComponent } from "@/components/navigation"
+import { Footer } from "@/components/footer"
+import { DashboardSelector } from "@/components/dashboard-selector"
 import Link from "next/link"
 
-// Mock user data
-const userData = {
+// Mock user data - in a real app, this would come from authentication
+const mockUser = {
   name: "John Doe",
   email: "john.doe@example.com",
-  phone: "+1 (555) 123-4567",
-  memberSince: "January 2023",
-  totalBookings: 12,
-  avatar: "/placeholder.svg?height=100&width=100&text=JD",
+  avatar: "/placeholder-user.jpg",
+  role: "customer" as "customer" | "admin"
 }
 
-// Mock bookings data
-const bookings = [
-  {
-    id: "CR-123456",
-    car: {
-      name: "BMW 3 Series",
-      type: "Luxury Sedan",
-      image: "/bmw-3-series-luxury-sedan.jpg",
-    },
-    status: "active",
-    pickupDate: "2024-01-15",
-    returnDate: "2024-01-20",
-    pickupLocation: "Downtown",
-    returnLocation: "Downtown",
-    total: 445,
-    days: 5,
-  },
-  {
-    id: "CR-123455",
-    car: {
-      name: "Toyota Camry",
-      type: "Midsize Sedan",
-      image: "/toyota-camry-midsize-sedan.jpg",
-    },
-    status: "upcoming",
-    pickupDate: "2024-01-25",
-    returnDate: "2024-01-28",
-    pickupLocation: "Airport",
-    returnLocation: "Airport",
-    total: 177,
-    days: 3,
-  },
-  {
-    id: "CR-123454",
-    car: {
-      name: "Range Rover Sport",
-      type: "Luxury SUV",
-      image: "/range-rover-sport-luxury-suv.jpg",
-    },
-    status: "completed",
-    pickupDate: "2023-12-10",
-    returnDate: "2023-12-15",
-    pickupLocation: "Downtown",
-    returnLocation: "Downtown",
-    total: 745,
-    days: 5,
-    rating: 5,
-  },
-  {
-    id: "CR-123453",
-    car: {
-      name: "Mercedes C-Class",
-      type: "Luxury Sedan",
-      image: "/mercedes-c-class-luxury-sedan.jpg",
-    },
-    status: "completed",
-    pickupDate: "2023-11-20",
-    returnDate: "2023-11-25",
-    pickupLocation: "City Center",
-    returnLocation: "City Center",
-    total: 475,
-    days: 5,
-    rating: 4,
-  },
+// Mock data for customer dashboard
+const customerStats = [
+  { title: "Total Bookings", value: "8", change: "+2 this month", icon: Calendar, color: "text-blue-600" },
+  { title: "Total Spent", value: "₹12,450", change: "+15% this month", icon: DollarSign, color: "text-green-600" },
+  { title: "Favorite Car", value: "BMW 3 Series", change: "Most booked", icon: Car, color: "text-purple-600" },
+  { title: "Member Since", value: "June 2023", change: "7 months", icon: Star, color: "text-orange-600" },
 ]
 
-const getStatusColor = (status: string) => {
-  switch (status) {
-    case "active":
-      return "bg-green-100 text-green-800"
-    case "upcoming":
-      return "bg-blue-100 text-blue-800"
-    case "completed":
-      return "bg-gray-100 text-gray-800"
-    case "cancelled":
-      return "bg-red-100 text-red-800"
-    default:
-      return "bg-gray-100 text-gray-800"
+// Mock data for admin dashboard
+const adminStats = [
+  { title: "Total Cars", value: "24", change: "+2 this month", icon: Car, color: "text-blue-600" },
+  { title: "Active Bookings", value: "18", change: "+5 this week", icon: Calendar, color: "text-green-600" },
+  { title: "Total Revenue", value: "₹45,230", change: "+12% this month", icon: DollarSign, color: "text-purple-600" },
+  { title: "Active Users", value: "156", change: "+8 this week", icon: Users, color: "text-orange-600" },
+]
+
+const recentBookings = [
+  {
+    id: "BK001",
+    customer: "John Doe",
+    car: "BMW 3 Series",
+    startDate: "2024-01-20",
+    endDate: "2024-01-25",
+    status: "confirmed",
+    amount: "₹445"
+  },
+  {
+    id: "BK002",
+    customer: "Sarah Wilson",
+    car: "Toyota Camry",
+    startDate: "2024-01-18",
+    endDate: "2024-01-22",
+    status: "pending",
+    amount: "₹236"
+  },
+  {
+    id: "BK003",
+    customer: "Mike Johnson",
+    car: "Range Rover Sport",
+    startDate: "2024-01-17",
+    endDate: "2024-01-22",
+    status: "completed",
+    amount: "₹745"
   }
-}
+]
+
+const emergencyAlerts = [
+  {
+    id: "EA001",
+    vehicle: "BMW 3 Series",
+    customer: "John Doe",
+    alertType: "Emergency Stop",
+    location: "Highway 1",
+    timestamp: "2024-01-20 14:35:00",
+    status: "active",
+    priority: "high"
+  },
+  {
+    id: "EA002",
+    vehicle: "Toyota Camry",
+    customer: "Sarah Wilson",
+    alertType: "Speed Violation",
+    location: "Downtown Office",
+    timestamp: "2024-01-20 14:30:00",
+    status: "resolved",
+    priority: "medium"
+  }
+]
 
 export default function DashboardPage() {
-  const [activeTab, setActiveTab] = useState("overview")
+  const [user] = useState(mockUser)
+  const isAdmin = user.role === "admin"
+  const stats = isAdmin ? adminStats : customerStats
 
-  const activeBookings = bookings.filter((b) => b.status === "active")
-  const upcomingBookings = bookings.filter((b) => b.status === "upcoming")
-  const completedBookings = bookings.filter((b) => b.status === "completed")
-
-  // Mock user data for navigation
-  const user = {
-    name: "John Doe",
-    email: "john.doe@example.com",
-    avatar: "/placeholder.svg?height=100&width=100&text=JD",
+  const getStatusBadge = (status: string) => {
+    switch (status) {
+      case "confirmed":
+        return <Badge className="bg-green-100 text-green-800"><CheckCircle className="h-3 w-3 mr-1" />Confirmed</Badge>
+      case "pending":
+        return <Badge className="bg-yellow-100 text-yellow-800"><Clock className="h-3 w-3 mr-1" />Pending</Badge>
+      case "completed":
+        return <Badge className="bg-blue-100 text-blue-800"><CheckCircle className="h-3 w-3 mr-1" />Completed</Badge>
+      case "active":
+        return <Badge className="bg-red-100 text-red-800"><AlertCircle className="h-3 w-3 mr-1" />Active</Badge>
+      case "resolved":
+        return <Badge className="bg-green-100 text-green-800"><CheckCircle className="h-3 w-3 mr-1" />Resolved</Badge>
+      default:
+        return <Badge variant="secondary">{status}</Badge>
+    }
   }
 
   return (
     <>
-      <Navigation user={user} />
+      <NavComponent user={user} />
       <div className="flex-1">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          {/* Header */}
-          <div className="mb-8">
-            <h1 className="text-3xl font-bold text-foreground mb-2">Welcome back, {userData.name}!</h1>
-            <p className="text-muted-foreground">Manage your rentals and account settings</p>
+          {/* Dashboard Selector */}
+          <DashboardSelector userRole={user.role} />
+
+          {/* Stats Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8 mt-8">
+            {stats.map((stat, index) => (
+              <Card key={index}>
+                <CardContent className="p-6">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-sm font-medium text-muted-foreground">{stat.title}</p>
+                      <p className="text-2xl font-bold text-foreground">{stat.value}</p>
+                      <p className="text-xs text-green-600">{stat.change}</p>
+                    </div>
+                    <div className={`p-3 rounded-full bg-muted ${stat.color}`}>
+                      <stat.icon className="h-6 w-6" />
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
           </div>
 
-          <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
+          {/* Main Content Tabs */}
+          <Tabs defaultValue="overview" className="space-y-6">
             <TabsList className="grid w-full grid-cols-4">
               <TabsTrigger value="overview">Overview</TabsTrigger>
-              <TabsTrigger value="bookings">My Bookings</TabsTrigger>
-              <TabsTrigger value="profile">Profile</TabsTrigger>
-              <TabsTrigger value="settings">Settings</TabsTrigger>
+              <TabsTrigger value="bookings">Bookings</TabsTrigger>
+              {isAdmin && <TabsTrigger value="emergency">Emergency</TabsTrigger>}
+              <TabsTrigger value="analytics">Analytics</TabsTrigger>
             </TabsList>
 
             {/* Overview Tab */}
             <TabsContent value="overview" className="space-y-6">
-              {/* Stats Cards */}
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-                <Card>
-                  <CardContent className="p-6">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <p className="text-sm font-medium text-muted-foreground">Active Rentals</p>
-                        <p className="text-2xl font-bold text-foreground">{activeBookings.length}</p>
-                      </div>
-                      <Car className="h-8 w-8 text-primary" />
-                    </div>
-                  </CardContent>
-                </Card>
-                <Card>
-                  <CardContent className="p-6">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <p className="text-sm font-medium text-muted-foreground">Upcoming</p>
-                        <p className="text-2xl font-bold text-foreground">{upcomingBookings.length}</p>
-                      </div>
-                      <Calendar className="h-8 w-8 text-primary" />
-                    </div>
-                  </CardContent>
-                </Card>
-                <Card>
-                  <CardContent className="p-6">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <p className="text-sm font-medium text-muted-foreground">Total Bookings</p>
-                        <p className="text-2xl font-bold text-foreground">{userData.totalBookings}</p>
-                      </div>
-                      <Clock className="h-8 w-8 text-primary" />
-                    </div>
-                  </CardContent>
-                </Card>
-                <Card>
-                  <CardContent className="p-6">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <p className="text-sm font-medium text-muted-foreground">Member Since</p>
-                        <p className="text-lg font-bold text-foreground">{userData.memberSince}</p>
-                      </div>
-                      <Star className="h-8 w-8 text-primary" />
-                    </div>
-                  </CardContent>
-                </Card>
-              </div>
-
-              {/* Current Rentals */}
-              <div className="grid lg:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                {/* Recent Bookings */}
                 <Card>
                   <CardHeader>
-                    <CardTitle className="flex items-center justify-between">
-                      <span>Current Rentals</span>
-                      <Badge variant="secondary">{activeBookings.length}</Badge>
+                    <CardTitle>
+                      {isAdmin ? "Recent Bookings" : "My Recent Bookings"}
                     </CardTitle>
                   </CardHeader>
-                  <CardContent className="space-y-4">
-                    {activeBookings.length > 0 ? (
-                      activeBookings.map((booking) => (
-                        <div key={booking.id} className="flex items-center space-x-4 p-4 border rounded-lg">
-                          <img
-                            src={booking.car.image || "/placeholder.svg"}
-                            alt={booking.car.name}
-                            className="w-16 h-12 object-cover rounded"
-                          />
-                          <div className="flex-1">
-                            <h3 className="font-semibold text-foreground">{booking.car.name}</h3>
-                            <p className="text-sm text-muted-foreground">{booking.car.type}</p>
-                            <div className="flex items-center text-xs text-muted-foreground mt-1">
-                              <MapPin className="h-3 w-3 mr-1" />
-                              {booking.pickupLocation}
-                            </div>
+                  <CardContent>
+                    <div className="space-y-4">
+                      {recentBookings.slice(0, 4).map((booking) => (
+                        <div key={booking.id} className="flex items-center justify-between p-3 border rounded-lg">
+                          <div className="space-y-1">
+                            <p className="font-medium">{booking.customer}</p>
+                            <p className="text-sm text-muted-foreground">{booking.car}</p>
+                            <p className="text-xs text-muted-foreground">{booking.startDate} - {booking.endDate}</p>
                           </div>
-                          <div className="text-right">
-                            <Badge className={getStatusColor(booking.status)}>
-                              {booking.status.charAt(0).toUpperCase() + booking.status.slice(1)}
-                            </Badge>
-                            <p className="text-sm text-muted-foreground mt-1">
-                              Until {new Date(booking.returnDate).toLocaleDateString()}
-                            </p>
+                          <div className="text-right space-y-2">
+                            {getStatusBadge(booking.status)}
+                            <p className="font-semibold">{booking.amount}</p>
                           </div>
                         </div>
-                      ))
-                    ) : (
-                      <div className="text-center py-8">
-                        <Car className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-                        <p className="text-muted-foreground">No active rentals</p>
-                        <Button className="mt-4" asChild>
-                          <Link href="/cars">Browse Cars</Link>
-                        </Button>
-                      </div>
-                    )}
+                      ))}
+                    </div>
                   </CardContent>
                 </Card>
 
+                {/* Quick Actions */}
                 <Card>
                   <CardHeader>
-                    <CardTitle className="flex items-center justify-between">
-                      <span>Upcoming Rentals</span>
-                      <Badge variant="secondary">{upcomingBookings.length}</Badge>
-                    </CardTitle>
+                    <CardTitle>Quick Actions</CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-4">
-                    {upcomingBookings.length > 0 ? (
-                      upcomingBookings.map((booking) => (
-                        <div key={booking.id} className="flex items-center space-x-4 p-4 border rounded-lg">
-                          <img
-                            src={booking.car.image || "/placeholder.svg"}
-                            alt={booking.car.name}
-                            className="w-16 h-12 object-cover rounded"
-                          />
-                          <div className="flex-1">
-                            <h3 className="font-semibold text-foreground">{booking.car.name}</h3>
-                            <p className="text-sm text-muted-foreground">{booking.car.type}</p>
-                            <div className="flex items-center text-xs text-muted-foreground mt-1">
-                              <Calendar className="h-3 w-3 mr-1" />
-                              {new Date(booking.pickupDate).toLocaleDateString()}
-                            </div>
-                          </div>
-                          <div className="text-right">
-                            <Badge className={getStatusColor(booking.status)}>
-                              {booking.status.charAt(0).toUpperCase() + booking.status.slice(1)}
-                            </Badge>
-                            <p className="text-sm text-muted-foreground mt-1">${booking.total}</p>
-                          </div>
-                        </div>
-                      ))
-                    ) : (
-                      <div className="text-center py-8">
-                        <Calendar className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-                        <p className="text-muted-foreground">No upcoming rentals</p>
-                        <Button className="mt-4" asChild>
-                          <Link href="/cars">Book a Car</Link>
+                    {isAdmin ? (
+                      <>
+                        <Button className="w-full justify-start" variant="outline" asChild>
+                          <Link href="/admin-dashboard?tab=fleet">
+                            <Car className="h-4 w-4 mr-2" />
+                            Manage Fleet
+                          </Link>
                         </Button>
-                      </div>
+                        <Button className="w-full justify-start" variant="outline" asChild>
+                          <Link href="/admin-dashboard?tab=bookings">
+                            <Calendar className="h-4 w-4 mr-2" />
+                            Manage Bookings
+                          </Link>
+                        </Button>
+                        <Button className="w-full justify-start" variant="outline" asChild>
+                          <Link href="/admin-dashboard?tab=emergency">
+                            <Shield className="h-4 w-4 mr-2" />
+                            Emergency Contacts
+                          </Link>
+                        </Button>
+                        <Button className="w-full justify-start" variant="outline" asChild>
+                          <Link href="/admin-tracking">
+                            <Navigation className="h-4 w-4 mr-2" />
+                            GPS Tracking
+                          </Link>
+                        </Button>
+                      </>
+                    ) : (
+                      <>
+                        <Button className="w-full justify-start" variant="outline" asChild>
+                          <Link href="/cars">
+                            <Car className="h-4 w-4 mr-2" />
+                            Browse Cars
+                          </Link>
+                        </Button>
+                        <Button className="w-full justify-start" variant="outline" asChild>
+                          <Link href="/customer-dashboard?tab=bookings">
+                            <Calendar className="h-4 w-4 mr-2" />
+                            My Bookings
+                          </Link>
+                        </Button>
+                        <Button className="w-full justify-start" variant="outline" asChild>
+                          <Link href="/customer-dashboard?tab=favorites">
+                            <Star className="h-4 w-4 mr-2" />
+                            Favorites
+                          </Link>
+                        </Button>
+                        <Button className="w-full justify-start" variant="outline" asChild>
+                          <Link href="/contact">
+                            <Phone className="h-4 w-4 mr-2" />
+                            Contact Support
+                          </Link>
+                        </Button>
+                      </>
                     )}
                   </CardContent>
                 </Card>
               </div>
-
-              {/* Quick Actions */}
-              <Card>
-                <CardHeader>
-                  <CardTitle>Quick Actions</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <Button className="h-20 flex-col" asChild>
-                      <Link href="/cars">
-                        <Plus className="h-6 w-6 mb-2" />
-                        Book New Rental
-                      </Link>
-                    </Button>
-                    <Button variant="outline" className="h-20 flex-col bg-transparent">
-                      <Download className="h-6 w-6 mb-2" />
-                      Download Receipts
-                    </Button>
-                    <Button variant="outline" className="h-20 flex-col bg-transparent">
-                      <Settings className="h-6 w-6 mb-2" />
-                      Account Settings
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
             </TabsContent>
 
             {/* Bookings Tab */}
             <TabsContent value="bookings" className="space-y-6">
-              <div className="flex items-center justify-between">
-                <h2 className="text-2xl font-bold text-foreground">My Bookings</h2>
-                <Button asChild>
-                  <Link href="/cars">
-                    <Plus className="h-4 w-4 mr-2" />
-                    New Booking
-                  </Link>
-                </Button>
-              </div>
-
-              <div className="space-y-4">
-                {bookings.map((booking) => (
-                  <Card key={booking.id}>
-                    <CardContent className="p-6">
-                      <div className="flex items-center justify-between mb-4">
-                        <div className="flex items-center space-x-4">
-                          <img
-                            src={booking.car.image || "/placeholder.svg"}
-                            alt={booking.car.name}
-                            className="w-20 h-16 object-cover rounded-lg"
-                          />
-                          <div>
-                            <h3 className="text-lg font-semibold text-foreground">{booking.car.name}</h3>
-                            <p className="text-muted-foreground">{booking.car.type}</p>
-                            <p className="text-sm text-muted-foreground">Booking ID: {booking.id}</p>
-                          </div>
-                        </div>
-                        <div className="text-right">
-                          <Badge className={getStatusColor(booking.status)}>
-                            {booking.status.charAt(0).toUpperCase() + booking.status.slice(1)}
-                          </Badge>
-                          <p className="text-lg font-bold text-primary mt-2">${booking.total}</p>
-                        </div>
-                      </div>
-
-                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
-                        <div className="flex items-center space-x-2">
-                          <Calendar className="h-4 w-4 text-muted-foreground" />
-                          <div>
-                            <p className="text-sm font-medium">Pick-up</p>
-                            <p className="text-sm text-muted-foreground">
-                              {new Date(booking.pickupDate).toLocaleDateString()}
-                            </p>
-                          </div>
-                        </div>
-                        <div className="flex items-center space-x-2">
-                          <Calendar className="h-4 w-4 text-muted-foreground" />
-                          <div>
-                            <p className="text-sm font-medium">Return</p>
-                            <p className="text-sm text-muted-foreground">
-                              {new Date(booking.returnDate).toLocaleDateString()}
-                            </p>
-                          </div>
-                        </div>
-                        <div className="flex items-center space-x-2">
-                          <MapPin className="h-4 w-4 text-muted-foreground" />
-                          <div>
-                            <p className="text-sm font-medium">Location</p>
-                            <p className="text-sm text-muted-foreground">{booking.pickupLocation}</p>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-4">
-                          <span className="text-sm text-muted-foreground">{booking.days} days</span>
-                          {booking.rating && (
-                            <div className="flex items-center">
-                              <Star className="h-4 w-4 text-yellow-400 fill-current" />
-                              <span className="text-sm ml-1">{booking.rating}/5</span>
-                            </div>
-                          )}
-                        </div>
-                        <div className="flex space-x-2">
-                          <Button size="sm" variant="outline">
-                            <Eye className="h-4 w-4 mr-1" />
-                            View
-                          </Button>
-                          {booking.status === "upcoming" && (
-                            <>
-                              <Button size="sm" variant="outline">
-                                <Edit className="h-4 w-4 mr-1" />
-                                Modify
-                              </Button>
-                              <Button size="sm" variant="outline">
-                                <Trash2 className="h-4 w-4 mr-1" />
-                                Cancel
-                              </Button>
-                            </>
-                          )}
-                          {booking.status === "completed" && !booking.rating && (
-                            <Button size="sm">
-                              <Star className="h-4 w-4 mr-1" />
-                              Rate
-                            </Button>
-                          )}
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
-            </TabsContent>
-
-            {/* Profile Tab */}
-            <TabsContent value="profile" className="space-y-6">
               <Card>
                 <CardHeader>
-                  <CardTitle>Profile Information</CardTitle>
+                  <CardTitle>
+                    {isAdmin ? "All Bookings" : "My Bookings"}
+                  </CardTitle>
                 </CardHeader>
-                <CardContent className="space-y-6">
-                  <div className="flex items-center space-x-6">
-                    <Avatar className="h-24 w-24">
-                      <AvatarImage src={userData.avatar || "/placeholder.svg"} alt={userData.name} />
-                      <AvatarFallback className="text-lg">JD</AvatarFallback>
-                    </Avatar>
-                    <div className="space-y-2">
-                      <Button variant="outline" size="sm">
-                        Change Photo
-                      </Button>
-                      <p className="text-sm text-muted-foreground">JPG, GIF or PNG. 1MB max.</p>
-                    </div>
-                  </div>
-
-                  <Separator />
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="space-y-2">
-                      <Label htmlFor="firstName">First Name</Label>
-                      <Input id="firstName" defaultValue="John" />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="lastName">Last Name</Label>
-                      <Input id="lastName" defaultValue="Doe" />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="email">Email Address</Label>
-                      <Input id="email" type="email" defaultValue={userData.email} />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="phone">Phone Number</Label>
-                      <Input id="phone" type="tel" defaultValue={userData.phone} />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="dateOfBirth">Date of Birth</Label>
-                      <Input id="dateOfBirth" type="date" defaultValue="1990-01-01" />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="licenseNumber">License Number</Label>
-                      <Input id="licenseNumber" defaultValue="DL123456789" />
-                    </div>
-                  </div>
-
-                  <div className="flex justify-end">
-                    <Button>Save Changes</Button>
+                <CardContent>
+                  <div className="space-y-4">
+                    {recentBookings.map((booking) => (
+                      <div key={booking.id} className="flex items-center justify-between p-4 border rounded-lg">
+                        <div className="flex items-center space-x-4">
+                          <div className="w-12 h-12 bg-muted rounded-lg flex items-center justify-center">
+                            <Car className="h-6 w-6 text-muted-foreground" />
+                          </div>
+                          <div className="space-y-1">
+                            <p className="font-medium">{booking.customer}</p>
+                            <p className="text-sm text-muted-foreground">{booking.car}</p>
+                            <p className="text-xs text-muted-foreground">Booking ID: {booking.id}</p>
+                          </div>
+                        </div>
+                        <div className="text-right space-y-2">
+                          <div className="flex items-center space-x-2">
+                            {getStatusBadge(booking.status)}
+                          </div>
+                          <p className="font-semibold text-lg">{booking.amount}</p>
+                          <p className="text-sm text-muted-foreground">{booking.startDate} - {booking.endDate}</p>
+                        </div>
+                        <div className="flex gap-2">
+                          <Button size="sm" variant="outline">
+                            <Calendar className="h-4 w-4" />
+                          </Button>
+                          <Button size="sm" variant="outline">
+                            <Phone className="h-4 w-4" />
+                          </Button>
+                        </div>
+                      </div>
+                    ))}
                   </div>
                 </CardContent>
               </Card>
             </TabsContent>
 
-            {/* Settings Tab */}
-            <TabsContent value="settings" className="space-y-6">
-              <div className="grid gap-6">
+            {/* Emergency Tab (Admin only) */}
+            {isAdmin && (
+              <TabsContent value="emergency" className="space-y-6">
                 <Card>
                   <CardHeader>
-                    <CardTitle className="flex items-center">
-                      <Bell className="h-5 w-5 mr-2" />
-                      Notifications
+                    <CardTitle>Emergency Alerts</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-4">
+                      {emergencyAlerts.map((alert) => (
+                        <div key={alert.id} className={`p-4 border rounded-lg ${
+                          alert.status === "active" ? "border-red-200 bg-red-50" : ""
+                        }`}>
+                          <div className="flex items-center justify-between">
+                            <div className="space-y-2">
+                              <div className="flex items-center gap-2">
+                                <AlertCircle className="h-5 w-5 text-red-500" />
+                                <h3 className="font-semibold text-foreground">{alert.alertType}</h3>
+                                <Badge className={alert.priority === "high" ? "bg-red-100 text-red-800" : "bg-yellow-100 text-yellow-800"}>
+                                  {alert.priority}
+                                </Badge>
+                              </div>
+                              <p className="text-sm text-muted-foreground">
+                                Vehicle: {alert.vehicle} | Customer: {alert.customer}
+                              </p>
+                              <p className="text-sm text-muted-foreground">
+                                Location: {alert.location} | Time: {alert.timestamp}
+                              </p>
+                            </div>
+                            <div className="flex gap-2">
+                              <Button size="sm" variant="outline">
+                                <Phone className="h-4 w-4 mr-2" />
+                                Call Customer
+                              </Button>
+                              <Button size="sm" variant="outline">
+                                <Navigation className="h-4 w-4 mr-2" />
+                                Navigate
+                              </Button>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              </TabsContent>
+            )}
+
+            {/* Analytics Tab */}
+            <TabsContent value="analytics" className="space-y-6">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <Card>
+                  <CardHeader>
+                    <CardTitle>
+                      {isAdmin ? "Revenue Overview" : "Spending Overview"}
                     </CardTitle>
                   </CardHeader>
-                  <CardContent className="space-y-4">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <p className="font-medium">Email Notifications</p>
-                        <p className="text-sm text-muted-foreground">Receive booking confirmations and updates</p>
+                  <CardContent>
+                    <div className="h-64 flex items-center justify-center text-muted-foreground">
+                      <div className="text-center">
+                        <TrendingUp className="h-12 w-12 mx-auto mb-2" />
+                        <p>Analytics chart would go here</p>
                       </div>
-                      <Button variant="outline" size="sm">
-                        Enabled
-                      </Button>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <p className="font-medium">SMS Notifications</p>
-                        <p className="text-sm text-muted-foreground">Get text messages for important updates</p>
-                      </div>
-                      <Button variant="outline" size="sm">
-                        Disabled
-                      </Button>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <p className="font-medium">Marketing Emails</p>
-                        <p className="text-sm text-muted-foreground">Receive promotional offers and deals</p>
-                      </div>
-                      <Button variant="outline" size="sm">
-                        Enabled
-                      </Button>
                     </div>
                   </CardContent>
                 </Card>
 
                 <Card>
                   <CardHeader>
-                    <CardTitle className="flex items-center">
-                      <CreditCard className="h-5 w-5 mr-2" />
-                      Payment Methods
+                    <CardTitle>
+                      {isAdmin ? "Popular Cars" : "My Preferences"}
                     </CardTitle>
                   </CardHeader>
-                  <CardContent className="space-y-4">
-                    <div className="flex items-center justify-between p-4 border rounded-lg">
-                      <div className="flex items-center space-x-3">
-                        <div className="w-10 h-6 bg-blue-600 rounded text-white text-xs flex items-center justify-center font-bold">
-                          VISA
-                        </div>
-                        <div>
-                          <p className="font-medium">•••• •••• •••• 4242</p>
-                          <p className="text-sm text-muted-foreground">Expires 12/25</p>
-                        </div>
-                      </div>
-                      <div className="flex space-x-2">
-                        <Button size="sm" variant="outline">
-                          Edit
-                        </Button>
-                        <Button size="sm" variant="outline">
-                          Remove
-                        </Button>
-                      </div>
-                    </div>
-                    <Button variant="outline" className="w-full bg-transparent">
-                      <Plus className="h-4 w-4 mr-2" />
-                      Add Payment Method
-                    </Button>
-                  </CardContent>
-                </Card>
-
-                <Card>
-                  <CardHeader>
-                    <CardTitle className="flex items-center">
-                      <Shield className="h-5 w-5 mr-2" />
-                      Security
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent className="space-y-4">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <p className="font-medium">Change Password</p>
-                        <p className="text-sm text-muted-foreground">Update your account password</p>
-                      </div>
-                      <Button variant="outline" size="sm">
-                        Change
-                      </Button>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <p className="font-medium">Two-Factor Authentication</p>
-                        <p className="text-sm text-muted-foreground">Add an extra layer of security</p>
-                      </div>
-                      <Button variant="outline" size="sm">
-                        Enable
-                      </Button>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <p className="font-medium">Login Activity</p>
-                        <p className="text-sm text-muted-foreground">View recent login attempts</p>
-                      </div>
-                      <Button variant="outline" size="sm">
-                        View
-                      </Button>
+                  <CardContent>
+                    <div className="space-y-4">
+                      {isAdmin ? (
+                        <>
+                          <div className="flex items-center justify-between">
+                            <div className="flex items-center space-x-3">
+                              <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center">
+                                <span className="text-sm font-semibold text-primary">1</span>
+                              </div>
+                              <div>
+                                <p className="font-medium">BMW 3 Series</p>
+                                <p className="text-sm text-muted-foreground">24 bookings</p>
+                              </div>
+                            </div>
+                            <div className="text-right">
+                              <p className="font-semibold">₹89</p>
+                              <p className="text-sm text-muted-foreground">/day</p>
+                            </div>
+                          </div>
+                          <div className="flex items-center justify-between">
+                            <div className="flex items-center space-x-3">
+                              <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center">
+                                <span className="text-sm font-semibold text-primary">2</span>
+                              </div>
+                              <div>
+                                <p className="font-medium">Toyota Camry</p>
+                                <p className="text-sm text-muted-foreground">18 bookings</p>
+                              </div>
+                            </div>
+                            <div className="text-right">
+                              <p className="font-semibold">₹59</p>
+                              <p className="text-sm text-muted-foreground">/day</p>
+                            </div>
+                          </div>
+                        </>
+                      ) : (
+                        <>
+                          <div className="flex items-center justify-between">
+                            <div className="flex items-center space-x-3">
+                              <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center">
+                                <span className="text-sm font-semibold text-primary">1</span>
+                              </div>
+                              <div>
+                                <p className="font-medium">BMW 3 Series</p>
+                                <p className="text-sm text-muted-foreground">Your favorite</p>
+                              </div>
+                            </div>
+                            <div className="text-right">
+                              <p className="font-semibold">3 bookings</p>
+                            </div>
+                          </div>
+                          <div className="flex items-center justify-between">
+                            <div className="flex items-center space-x-3">
+                              <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center">
+                                <span className="text-sm font-semibold text-primary">2</span>
+                              </div>
+                              <div>
+                                <p className="font-medium">Toyota Camry</p>
+                                <p className="text-sm text-muted-foreground">Frequently booked</p>
+                              </div>
+                            </div>
+                            <div className="text-right">
+                              <p className="font-semibold">2 bookings</p>
+                            </div>
+                          </div>
+                        </>
+                      )}
                     </div>
                   </CardContent>
                 </Card>
