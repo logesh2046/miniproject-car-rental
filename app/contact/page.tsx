@@ -29,7 +29,11 @@ const contactInfo = [
   {
     icon: Phone,
     title: "Phone",
+<<<<<<< HEAD
     details: ["+91 98765 43210", "+91 98765 43211"],
+=======
+    details: ["+91 9003585335", "+91 842863122"],
+>>>>>>> aa15dce (updatedfronted)
     description: "Call us for immediate assistance"
   },
   {
@@ -41,7 +45,14 @@ const contactInfo = [
   {
     icon: MapPin,
     title: "Office Address",
+<<<<<<< HEAD
     details: ["123 Business Park, Sector 5", "Gurgaon, Haryana 122001"],
+=======
+    details: [
+      "BANNARI AMMAN INSTITUTE OF TECHNOLOGY",
+      "Sathyamangalam, Erode"
+    ],
+>>>>>>> aa15dce (updatedfronted)
     description: "Visit our main office"
   },
   {

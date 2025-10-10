@@ -104,21 +104,33 @@ export default function HomePage() {
                 {
                   name: "BMW 3 Series",
                   type: "Luxury Sedan",
+<<<<<<< HEAD
                   price: "89",
+=======
+                  price: "1889",
+>>>>>>> aa15dce (updatedfronted)
                   image: "/bmw-3-series-luxury-sedan.jpg",
                   features: ["Automatic", "5 Seats", "Premium Audio"],
                 },
                 {
                   name: "Toyota Camry",
                   type: "Midsize Sedan",
+<<<<<<< HEAD
                   price: "59",
+=======
+                  price: "2000",
+>>>>>>> aa15dce (updatedfronted)
                   image: "/toyota-camry-midsize-sedan.jpg",
                   features: ["Automatic", "5 Seats", "Fuel Efficient"],
                 },
                 {
                   name: "Range Rover Sport",
                   type: "Luxury SUV",
+<<<<<<< HEAD
                   price: "149",
+=======
+                  price: "4999",
+>>>>>>> aa15dce (updatedfronted)
                   image: "/range-rover-sport-luxury-suv.jpg",
                   features: ["AWD", "7 Seats", "Premium Interior"],
                 },

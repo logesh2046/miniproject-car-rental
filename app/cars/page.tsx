@@ -17,8 +17,13 @@ const cars = [
     id: 1,
     name: "BMW 3 Series",
     type: "Luxury Sedan",
+<<<<<<< HEAD
     price: 89,
     originalPrice: 99,
+=======
+    price: 1889,
+    originalPrice: 2999,
+>>>>>>> aa15dce (updatedfronted)
     image: "/bmw-3-series-luxury-sedan.jpg",
     rating: 4.8,
     reviews: 124,
@@ -26,15 +31,24 @@ const cars = [
     fuel: "Petrol",
     transmission: "Automatic",
     seats: 5,
+<<<<<<< HEAD
     location: "Downtown",
+=======
+    location: "coimbatore",
+>>>>>>> aa15dce (updatedfronted)
     available: true,
   },
   {
     id: 2,
     name: "Toyota Camry",
     type: "Midsize Sedan",
+<<<<<<< HEAD
     price: 59,
     originalPrice: 69,
+=======
+    price: 2000,
+    originalPrice: 2699,
+>>>>>>> aa15dce (updatedfronted)
     image: "/toyota-camry-midsize-sedan.jpg",
     rating: 4.6,
     reviews: 89,
@@ -42,15 +56,24 @@ const cars = [
     fuel: "Hybrid",
     transmission: "Automatic",
     seats: 5,
+<<<<<<< HEAD
     location: "Airport",
+=======
+    location: "Coimbatore",
+>>>>>>> aa15dce (updatedfronted)
     available: true,
   },
   {
     id: 3,
     name: "Range Rover Sport",
     type: "Luxury SUV",
+<<<<<<< HEAD
     price: 149,
     originalPrice: 169,
+=======
+    price: 4999,
+    originalPrice: 6000,
+>>>>>>> aa15dce (updatedfronted)
     image: "/range-rover-sport-luxury-suv.jpg",
     rating: 4.9,
     reviews: 156,
@@ -58,15 +81,24 @@ const cars = [
     fuel: "Petrol",
     transmission: "Automatic",
     seats: 7,
+<<<<<<< HEAD
     location: "Downtown",
+=======
+    location: "Coimbatore airport",
+>>>>>>> aa15dce (updatedfronted)
     available: true,
   },
   {
     id: 4,
     name: "Honda Civic",
     type: "Compact Car",
+<<<<<<< HEAD
     price: 45,
     originalPrice: 55,
+=======
+    price: 1500,
+    originalPrice: 1999,
+>>>>>>> aa15dce (updatedfronted)
     image: "/honda-civic-compact-car.png",
     rating: 4.4,
     reviews: 67,
@@ -74,15 +106,24 @@ const cars = [
     fuel: "Petrol",
     transmission: "Manual",
     seats: 5,
+<<<<<<< HEAD
     location: "City Center",
+=======
+    location: "Ukkadam",
+>>>>>>> aa15dce (updatedfronted)
     available: true,
   },
   {
     id: 5,
     name: "Mercedes C-Class",
     type: "Luxury Sedan",
+<<<<<<< HEAD
     price: 95,
     originalPrice: 110,
+=======
+    price: 9500,
+    originalPrice: 12000,
+>>>>>>> aa15dce (updatedfronted)
     image: "/mercedes-c-class-luxury-sedan.jpg",
     rating: 4.7,
     reviews: 98,
@@ -90,15 +131,24 @@ const cars = [
     fuel: "Petrol",
     transmission: "Automatic",
     seats: 5,
+<<<<<<< HEAD
     location: "Airport",
+=======
+    location: "Avinashi road",
+>>>>>>> aa15dce (updatedfronted)
     available: false,
   },
   {
     id: 6,
     name: "Ford Explorer",
     type: "SUV",
+<<<<<<< HEAD
     price: 79,
     originalPrice: 89,
+=======
+    price: 8799,
+    originalPrice: 9999,
+>>>>>>> aa15dce (updatedfronted)
     image: "/ford-explorer-suv.png",
     rating: 4.5,
     reviews: 112,
@@ -106,7 +156,171 @@ const cars = [
     fuel: "Petrol",
     transmission: "Automatic",
     seats: 7,
+<<<<<<< HEAD
     location: "Downtown",
+=======
+    location: "Coimbatore",
+    available: true,
+  },
+  {
+    id: 7,
+    name: "Maruti Swift",
+    type: "Hatchback",
+    price: 1200,
+    originalPrice: 1500,
+    image: "/swift.webp",
+    rating: 4.3,
+    reviews: 245,
+    features: ["Manual", "5 Seats", "Fuel Efficient", "AC"],
+    fuel: "Petrol",
+    transmission: "Manual",
+    seats: 5,
+    location: "Coimbatore",
+    available: true,
+  },
+  {
+    id: 8,
+    name: "Hyundai i20",
+    type: "Hatchback",
+    price: 1400,
+    originalPrice: 1700,
+    image: "/i20.webp",
+    rating: 4.4,
+    reviews: 189,
+    features: ["Manual", "5 Seats", "Music System", "Power Steering"],
+    fuel: "Petrol",
+    transmission: "Manual",
+    seats: 5,
+    location: "Airport",
+    available: true,
+  },
+  {
+    id: 9,
+    name: "Tata Nexon",
+    type: "Compact SUV",
+    price: 1800,
+    originalPrice: 2200,
+    image: "/nexon.webp",
+    rating: 4.2,
+    reviews: 156,
+    features: ["Manual", "5 Seats", "Touchscreen", "Safety Features"],
+    fuel: "Diesel",
+    transmission: "Manual",
+    seats: 5,
+    location: "Ukkadam",
+    available: true,
+  },
+  {
+    id: 10,
+    name: "Maruti Dzire",
+    type: "Sedan",
+    price: 1600,
+    originalPrice: 1900,
+    image: "/Dzire.webp",
+    rating: 4.1,
+    reviews: 203,
+    features: ["Manual", "5 Seats", "Boot Space", "Mileage"],
+    fuel: "Petrol",
+    transmission: "Manual",
+    seats: 5,
+    location: "Coimbatore",
+    available: true,
+  },
+  {
+    id: 11,
+    name: "Hyundai Creta",
+    type: "SUV",
+    price: 2500,
+    originalPrice: 3000,
+    image: "/creta.webp",
+    rating: 4.5,
+    reviews: 178,
+    features: ["Manual", "5 Seats", "Sunroof", "Touchscreen"],
+    fuel: "Petrol",
+    transmission: "Manual",
+    seats: 5,
+    location: "Avinashi road",
+    available: true,
+  },
+  {
+    id: 12,
+    name: "Maruti Ertiga",
+    type: "MPV",
+    price: 2000,
+    originalPrice: 2400,
+    image: "/ertiga.webp",
+    rating: 4.0,
+    reviews: 167,
+    features: ["Manual", "7 Seats", "Spacious", "Family Car"],
+    fuel: "Petrol",
+    transmission: "Manual",
+    seats: 7,
+    location: "Coimbatore",
+    available: true,
+  },
+  {
+    id: 13,
+    name: "Honda City",
+    type: "Sedan",
+    price: 2200,
+    originalPrice: 2600,
+    image: "/New-Honda-All-City.webp",
+    rating: 4.6,
+    reviews: 234,
+    features: ["Manual", "5 Seats", "Premium", "Comfort"],
+    fuel: "Petrol",
+    transmission: "Manual",
+    seats: 5,
+    location: "Airport",
+    available: true,
+  },
+  {
+    id: 14,
+    name: "Mahindra XUV300",
+    type: "Compact SUV",
+    price: 1900,
+    originalPrice: 2300,
+    image: "/Mahindra XUV300.webp",
+    rating: 4.2,
+    reviews: 145,
+    features: ["Manual", "5 Seats", "Safety", "Features"],
+    fuel: "Diesel",
+    transmission: "Manual",
+    seats: 5,
+    location: "Coimbatore",
+    available: true,
+  },
+  {
+    id: 15,
+    name: "Kia Seltos",
+    type: "SUV",
+    price: 2800,
+    originalPrice: 3200,
+    image: "/Kiaseltos.webp",
+    rating: 4.4,
+    reviews: 198,
+    features: ["Manual", "5 Seats", "Premium", "Technology"],
+    fuel: "Petrol",
+    transmission: "Manual",
+    seats: 5,
+    location: "Ukkadam",
+    available: true,
+  },
+  {
+    id: 16,
+    name: "Maruti Baleno",
+    type: "Hatchback",
+    price: 1300,
+    originalPrice: 1600,
+    image: "/suzuki-baleno.webp",
+    rating: 4.3,
+    reviews: 221,
+    features: ["Manual", "5 Seats", "Efficient", "Reliable"],
+    fuel: "Petrol",
+    transmission: "Manual",
+    seats: 5,
+    location: "Coimbatore",
+>>>>>>> aa15dce (updatedfronted)
     available: true,
   },
 ]
@@ -116,7 +330,11 @@ export default function CarsPage() {
   const [selectedType, setSelectedType] = useState("all")
   const [selectedTransmission, setSelectedTransmission] = useState("all")
   const [selectedLocation, setSelectedLocation] = useState("all")
+<<<<<<< HEAD
   const [priceRange, setPriceRange] = useState([0, 200])
+=======
+  const [priceRange, setPriceRange] = useState([0, 10000])
+>>>>>>> aa15dce (updatedfronted)
   const [showFilters, setShowFilters] = useState(false)
 
   const filteredCars = cars.filter((car) => {
@@ -218,9 +436,15 @@ export default function CarsPage() {
                       <Slider
                         value={priceRange}
                         onValueChange={setPriceRange}
+<<<<<<< HEAD
                         max={200}
                         min={0}
                         step={10}
+=======
+                        max={10000}
+                        min={0}
+                        step={100}
+>>>>>>> aa15dce (updatedfronted)
                         className="w-full"
                       />
                     </div>
@@ -350,7 +574,11 @@ export default function CarsPage() {
                   setSelectedType("all")
                   setSelectedTransmission("all")
                   setSelectedLocation("all")
+<<<<<<< HEAD
                   setPriceRange([0, 200])
+=======
+                  setPriceRange([0, 10000])
+>>>>>>> aa15dce (updatedfronted)
                 }}
               >
                 Clear All Filters

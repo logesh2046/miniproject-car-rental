@@ -13,7 +13,11 @@ export function Footer() {
               <span className="text-xl font-bold">CarRental</span>
             </div>
             <p className="text-background/80 text-sm leading-relaxed">
+<<<<<<< HEAD
               Your trusted partner for premium car rental services worldwide. Experience luxury, comfort, and
+=======
+              Your trusted partner for  car rental services worldwide. Experience luxury, comfort, and
+>>>>>>> aa15dce (updatedfronted)
               reliability with every journey.
             </p>
             <div className="flex space-x-4">
@@ -102,7 +106,11 @@ export function Footer() {
             <div className="space-y-3 text-background/80 text-sm">
               <div className="flex items-center">
                 <Phone className="h-4 w-4 mr-2 text-primary" />
+<<<<<<< HEAD
                 <span>1-800-CAR-RENT</span>
+=======
+                <span>1-800-998-1529</span>
+>>>>>>> aa15dce (updatedfronted)
               </div>
               <div className="flex items-center">
                 <Mail className="h-4 w-4 mr-2 text-primary" />
@@ -111,11 +119,19 @@ export function Footer() {
               <div className="flex items-start">
                 <MapPin className="h-4 w-4 mr-2 text-primary mt-0.5" />
                 <span>
+<<<<<<< HEAD
                   123 Business Ave
                   <br />
                   Suite 100
                   <br />
                   New York, NY 10001
+=======
+                  Bannari amman institute of technology
+                  <br />
+                  Sathyamangalam
+                  <br />
+                  Erode-638401
+>>>>>>> aa15dce (updatedfronted)
                 </span>
               </div>
               <div className="pt-2">
